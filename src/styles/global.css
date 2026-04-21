@@ -134,13 +134,21 @@ main {
 
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06); 
 }
+.card {
+  transition: 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.08);
+}
 
 /* DASHBOARD */
 
 .dashboard {
   display: flex;
   flex-direction: column;
-  gap: 32px;
+  gap: 24px;
 }
 
 .dashboard-header h1 {
@@ -150,14 +158,41 @@ main {
 
 .dashboard-header p {
   color: var(--text-secondary);
-  margin-top: 8px;
+  margin-top: 6px;
+}
+
+.hero {
+  background: linear-gradient(135deg, #6366F1, #8B5CF6);
+  color: white;
+  padding: 40px;
+  border-radius: 20px;
+  margin-bottom: 30px;
 }
 
 /* STATS GRID */
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 16px;
+  margin-bottom: 30px;
+}
+
+.stat-card {
+  text-align: center;
+}
+
+.stat-card h3 {
+  font-size: 24px;
+  margin-bottom: 6px;
+}
+
+/* SECTIONS AND TITLES*/
+.section {
+  margin-top: 20px;
+}
+
+.section-title {
+  margin-bottom: 16px;
 }
 
 /* ACTIONS */
@@ -187,8 +222,8 @@ main {
 
 .events-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
 }
 .container {
   max-width: 1200px;
@@ -220,7 +255,6 @@ main {
   font-weight: 500;
   transition: 0.2s;
 }
-
 .btn-primary:hover {
   opacity: 0.9;
 }
@@ -887,6 +921,273 @@ main {
   display: flex;
   gap: 12px;
   justify-content: center;
+}
+
+.order-page h1 {
+  margin-bottom: 20px;
+}
+
+.order-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.order-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.order-id {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.order-meta {
+  text-align: right;
+}
+
+.amount {
+  font-weight: bold;
+}
+
+.status {
+  display: inline-block;
+  margin-top: 6px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+}
+
+/* STATUS COLORS */
+.status.completed {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.status.pending {
+  background: #fef9c3;
+  color: #854d0e;
+}
+
+.status.failed {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.view-btn {
+  margin-top: 8px;
+  font-size: 13px;
+  color: var(--accent);
+  cursor: pointer;
+}
+
+.order-detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.order-summary h2 {
+  margin-bottom: 6px;
+}
+
+.order-id {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-top: 8px;
+}
+
+/* STATUS */
+.status {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+}
+
+.status.completed {
+  background: #dcfce7;
+  color: #166534;
+}
+
+/* TICKETS */
+.order-tickets {
+  margin-top: 20px;
+}
+
+.ticket-line {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 12px;
+}
+
+.section {
+  font-weight: 500;
+}
+
+.seats {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+/* PAYMENT */
+.order-payment {
+  margin-top: 20px;
+}
+
+.payment-row {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.payment-row.total {
+  font-weight: bold;
+  margin-top: 16px;
+}
+
+
+.loyalty-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+/* BALANCE */
+.balance-card {
+  text-align: center;
+  padding: 30px;
+}
+
+.balance-card h2 {
+  font-size: 32px;
+  margin-bottom: 6px;
+}
+
+/* HISTORY */
+.loyalty-history {
+  margin-top: 20px;
+}
+
+.history-row {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 12px;
+}
+
+.desc {
+  font-weight: 500;
+}
+
+.date {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.points {
+  font-weight: bold;
+}
+
+.points.plus {
+  color: var(--success);
+}
+
+.points.minus {
+  color: var(--error);
+}
+
+.redeem-header {
+  margin-bottom: 20px;
+}
+
+.rewards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 16px;
+}
+
+.reward-card {
+  cursor: pointer;
+  text-align: center;
+  transition: 0.2s;
+}
+
+.reward-card.active {
+  border: 2px solid var(--accent);
+}
+
+.reward-card.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.disabled-text {
+  font-size: 12px;
+  color: var(--error);
+}
+
+.redeem-action {
+  margin-top: 24px;
+  text-align: center;
+}
+
+.profile-header {
+  margin-bottom: 16px;
+}
+
+.profile-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.profile-info h2 {
+  margin-bottom: 6px;
+}
+
+.profile-info p {
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+/* ACTIONS */
+.profile-actions {
+  margin-top: 20px;
+}
+
+.action-list {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.action-item {
+  padding: 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.action-item:hover {
+  background: #F3F4F6;
+}
+/* MOBILE */
+@media (max-width: 768px) {
+  .order-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .order-meta {
+    text-align: left;
+  }
 }
 /* MOBILE */
 @media (max-width: 768px) {

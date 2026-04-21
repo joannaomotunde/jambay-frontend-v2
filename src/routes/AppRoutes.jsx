@@ -23,6 +23,11 @@ import Checkout from "../pages/user/Checkout";
 import PaymentAuth from "../pages/user/PaymentAuth";
 import PaymentSuccess from "../pages/user/PaymentSuccess";
 import MyTickets from "../pages/user/MyTickets";
+import OrderHistory from "../pages/user/OrderHistory";
+import OrderDetail from "../pages/user/OrderDetail";
+import LoyaltyWallet from "../pages/user/LoyaltyWallet";
+import RedeemPoints from "../pages/user/RedeemPoints";
+import Profile from "../pages/user/Profile";
 
 // ADMIN
 import OperatorHome from "../pages/admin/OperatorHome";
@@ -54,7 +59,12 @@ const AppRoutes = () => {
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/payment-auth" element={<PaymentAuth />} />
           <Route path="/payment-success" element={<PaymentSuccess />} />
-          <Route path="/my-tickets" element={<MyTickets />} />
+          <Route path="/tickets" element={<MyTickets />} />
+          <Route path="/order-history" element={<OrderHistory />} />
+          <Route path="/order/:id" element={<OrderDetail />} />
+          <Route path="/loyalty" element={<LoyaltyWallet />} />
+          <Route path="/redeem" element={<RedeemPoints />} />
+          <Route path="/profile" element={<Profile />} />
 
           {/* ADMIN */}
           <Route path="/admin" element={<OperatorHome />} />

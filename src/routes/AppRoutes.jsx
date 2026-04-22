@@ -10,7 +10,7 @@ import VerifyOTP from "../pages/auth/VerifyOTP";
 import AccessDenied403 from "../pages/auth/AccessDenied403";
 
 // LAYOUT WRAPPER
-import Layout from "../components/Layout/layout";
+import Layout from "../components/Layout/Layout";
 
 // USER
 import Dashboard from "../pages/user/Dashboard";
@@ -28,7 +28,9 @@ import OrderDetail from "../pages/user/OrderDetail";
 import LoyaltyWallet from "../pages/user/LoyaltyWallet";
 import RedeemPoints from "../pages/user/RedeemPoints";
 import Profile from "../pages/user/Profile";
-
+import EditProfile from "../pages/user/EditProfile";
+import Settings from "../pages/user/Settings";
+import Notifications from "../pages/user/Notifications";
 // ADMIN
 import OperatorHome from "../pages/admin/OperatorHome";
 
@@ -52,19 +54,22 @@ const AppRoutes = () => {
           {/* USER */}
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/events" element={<EventsBrowse />} />
-          <Route path="/events-details"element={<EventDetails />} />
+          <Route path="/events/:id" element={<EventDetails />} />
           <Route path="/seat-booking" element={<SeatBooking />} />
           <Route path="/seat-map" element={<SeatMap />} />
           <Route path="/ticket-detail" element={<TicketDetail />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/payment-auth" element={<PaymentAuth />} />
           <Route path="/payment-success" element={<PaymentSuccess />} />
-          <Route path="/tickets" element={<MyTickets />} />
+          <Route path="/my-tickets" element={<MyTickets />} />
           <Route path="/order-history" element={<OrderHistory />} />
           <Route path="/order/:id" element={<OrderDetail />} />
           <Route path="/loyalty" element={<LoyaltyWallet />} />
           <Route path="/redeem" element={<RedeemPoints />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/edit-profile" element={<EditProfile />} />
+          <Route path="/settings" element={<Settings />} />
+          <Route path="/notifications" element={<Notifications />} />
 
           {/* ADMIN */}
           <Route path="/admin" element={<OperatorHome />} />

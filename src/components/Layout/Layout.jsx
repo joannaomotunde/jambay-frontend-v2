@@ -7,7 +7,7 @@ const Layout = () => {
     <>
       <Header />
 
-      <main>
+      <main className="app-main">
         <Outlet />
       </main>
 

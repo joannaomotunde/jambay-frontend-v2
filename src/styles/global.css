@@ -4,8 +4,9 @@
   /* BACKGROUNDS */
   --bg-page: #F9FAFB;
   --bg-elevatedh: #15278b; 
-  --bg-elevated: #1e0a3c; 
+  --bg-elevated: #1a0a3c; 
   --bg-card: #FFFFFF;
+  --bg-large-card:#492383f0;
 
   /* ACCENTS */
   --accent: #393cc0;
@@ -22,6 +23,12 @@
 
   /* BORDER */
   --border: #E5E7EB;
+  --accent-violet: #7c3aed;    /* hover states, secondary CTA */
+--accent-warm:   #f97316;    /* badges, urgency, highlights */
+--success:       #0d9488;    /* swap green → teal, less generic */
+--text-accent:   #a78bfa;    /* replaces --text-muted-on-dark */
+--bg-card-alt:   #1e1157;    /* deeper card layer */
+--bg-card-mid:   #2d1b69;    /* mid-depth surface */
 }
 
 /* RESET */

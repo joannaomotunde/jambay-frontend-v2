@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "../../styles/auth.css";
-import { registerUser } from "../../services/auth";
+import { registerUser, loginUser } from "../../services/auth";
 
 function FloatingInput({ label, type = "text", placeholder, value, onChange }) {
   return (
@@ -19,18 +19,53 @@ function FloatingInput({ label, type = "text", placeholder, value, onChange }) {
 }
 
 function LoginForm({ onSwitch }) {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const handleLogin = async () => {
+    try {
+      if (!email || !password) {
+        alert("Email and password are required");
+        return;
+      }
+      const data = await loginUser({ email, password });
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("user", JSON.stringify(data.user));
+      alert("Login successful! Redirecting to dashboard...");
+      if (data.user.verified === false) {
+        alert("Please verify your email before logging in.");
+        return;
+      }
+      if (data.user.role === "admin") {
+        window.location.href = "/admin";
+        return;
+      }
+      window.location.href = "/dashboard";
+    } catch (error) {
+      alert(error.response?.data?.message || "Login failed. Please try again.");
+    }
+  };
   return (
     <div className="auth-form">
       <FloatingInput
         label="Email address"
         type="email"
         placeholder="you@example.com"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
       />
-      <FloatingInput label="Password" type="password" placeholder="••••••••" />
+      <FloatingInput
+        label="Password"
+        type="password"
+        placeholder="••••••••"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
       <div className="auth-forgot-row">
         <button className="auth-link-btn">Forgot password?</button>
       </div>
-      <button className="auth-submit">Sign in</button>
+      <button className="auth-submit" onClick={handleLogin}>
+        Sign in
+      </button>
       <p className="auth-switch-text">
         No account?{" "}
         <button className="auth-link-btn" onClick={onSwitch}>
@@ -47,12 +82,14 @@ function SignupForm({ onSwitch }) {
   const [confimPassword, setConfirmPassword] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [loading, setIsLoading] = useState(false);
   const handleRegister = async () => {
     try {
       if (password !== confimPassword) {
         alert("Passwords do not match");
         return;
       }
+      setIsLoading(true);
       let fullName = `${firstName} ${lastName}`;
       await registerUser({ name: fullName, email, password });
       console.log("Registration successful");
@@ -65,6 +102,8 @@ function SignupForm({ onSwitch }) {
         error.response?.data?.message ||
           "Registration failed. Please try again.",
       );
+    } finally {
+      setIsLoading(false);
     }
   };
   return (
@@ -105,12 +144,12 @@ function SignupForm({ onSwitch }) {
         placeholder="••••••••"
       />
       <button className="auth-submit" onClick={handleRegister}>
-        Create account
+        {loading ? "loading...." : "Sign in"}
       </button>
       <p className="auth-switch-text">
         Already have an account?{" "}
-        <button className="auth-link-btn" onClick={onSwitch}>
-          Sign in
+        <button className="auth-link-btn" onClick={onSwitch} disabled={loading}>
+          Sign In
         </button>
       </p>
     </div>

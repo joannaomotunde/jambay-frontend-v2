@@ -1,11 +1,19 @@
 import { useState } from "react";
 import "../../styles/auth.css";
+import { registerUser } from "../../services/auth";
 
-function FloatingInput({ label, type = "text", placeholder }) {
+function FloatingInput({ label, type = "text", placeholder, value, onChange }) {
   return (
     <div className="auth-field">
       <label className="auth-label">{label}</label>
-      <input className="auth-input" type={type} placeholder={placeholder} />
+
+      <input
+        className="auth-input"
+        type={type}
+        value={value}
+        placeholder={placeholder}
+        onChange={onChange}
+      />
     </div>
   );
 }
@@ -34,28 +42,71 @@ function LoginForm({ onSwitch }) {
 }
 
 function SignupForm({ onSwitch }) {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confimPassword, setConfirmPassword] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const handleRegister = async () => {
+    try {
+      if (password !== confimPassword) {
+        alert("Passwords do not match");
+        return;
+      }
+      let fullName = `${firstName} ${lastName}`;
+      await registerUser({ name: fullName, email, password });
+      console.log("Registration successful");
+      alert(
+        "Registration successful! Please check your email to verify your account.",
+      );
+      onSwitch();
+    } catch (error) {
+      alert(
+        error.response?.data?.message ||
+          "Registration failed. Please try again.",
+      );
+    }
+  };
   return (
     <div className="auth-form">
       <div className="auth-name-grid">
-        <FloatingInput label="First name" placeholder="Ada" />
-        <FloatingInput label="Last name" placeholder="Lovelace" />
+        <FloatingInput
+          label="First name"
+          placeholder="Ada"
+          value={firstName}
+          onChange={(e) => setFirstName(e.target.value)}
+        />
+        <FloatingInput
+          label="Last name"
+          placeholder="Lovelace"
+          value={lastName}
+          onChange={(e) => setLastName(e.target.value)}
+        />
       </div>
       <FloatingInput
         label="Email address"
+        value={email}
         type="email"
+        onChange={(e) => setEmail(e.target.value)}
         placeholder="you@example.com"
       />
       <FloatingInput
         label="Password"
         type="password"
         placeholder="min. 8 characters"
+        onChange={(e) => setPassword(e.target.value)}
+        value={password}
       />
       <FloatingInput
         label="Confirm password"
         type="password"
+        value={confimPassword}
+        onChange={(e) => setConfirmPassword(e.target.value)}
         placeholder="••••••••"
       />
-      <button className="auth-submit">Create account</button>
+      <button className="auth-submit" onClick={handleRegister}>
+        Create account
+      </button>
       <p className="auth-switch-text">
         Already have an account?{" "}
         <button className="auth-link-btn" onClick={onSwitch}>

@@ -1,106 +1,68 @@
 import { useState } from "react";
-import Toggle from "../../components/Toggle/Toggle";
 
 const Notifications = () => {
-  const [settings, setSettings] = useState({
-    eventReminders: true,
-    eventUpdates: true,
-    ticketConfirmations: true,
-    paymentReceipts: true,
-    promotions: false,
-    recommendations: false,
-  });
+  // MOCK DATA
+  const [notifications, setNotifications] = useState([
+    {
+      id: 1,
+      title: "Payment Successful",
+      message: "Your ticket for Afro Concert has been confirmed.",
+      time: "2 mins ago",
+      read: false,
+    },
+    {
+      id: 2,
+      title: "Event Reminder",
+      message: "Don't forget your event tomorrow at 6PM.",
+      time: "1 day ago",
+      read: true,
+    },
+  ]);
 
-  const update = (key, value) => {
-    setSettings((prev) => ({
-      ...prev,
-      [key]: value,
-    }));
+  const markAsRead = (id) => {
+    setNotifications((prev) =>
+      prev.map((n) =>
+        n.id === id ? { ...n, read: true } : n
+      )
+    );
   };
 
   return (
     <div className="container notifications-page">
 
-      {/* HEADER */}
       <div className="page-header">
         <h1>Notifications</h1>
       </div>
 
-      {/* EVENTS */}
-      <div className="card settings-card">
-        <h3>Events</h3>
+      <div className="card notifications-card">
 
-        <div className="settings-list">
-
-          <div className="settings-item toggle-item">
-            <span>Event Reminders</span>
-            <Toggle
-              checked={settings.eventReminders}
-              onChange={(v) => update("eventReminders", v)}
-            />
+        {notifications.length === 0 ? (
+          <div className="empty-state">
+            <p>No notifications yet</p>
           </div>
+        ) : (
+          <div className="notification-list">
 
-          <div className="settings-item toggle-item">
-            <span>Event Updates</span>
-            <Toggle
-              checked={settings.eventUpdates}
-              onChange={(v) => update("eventUpdates", v)}
-            />
+            {notifications.map((item) => (
+              <div
+                key={item.id}
+                className={`notification-item ${!item.read ? "unread" : ""}`}
+                onClick={() => markAsRead(item.id)}
+              >
+                <div className="notification-content">
+                  <h4>{item.title}</h4>
+                  <p>{item.message}</p>
+                  <span>{item.time}</span>
+                </div>
+
+                {!item.read && <div className="dot" />}
+              </div>
+            ))}
+
           </div>
+        )}
 
-        </div>
       </div>
-
-      {/* ACCOUNT ACTIVITY */}
-      <div className="card settings-card">
-        <h3>Account Activity</h3>
-
-        <div className="settings-list">
-
-          <div className="settings-item toggle-item">
-            <span>Ticket Confirmations</span>
-            <Toggle
-              checked={settings.ticketConfirmations}
-              onChange={(v) => update("ticketConfirmations", v)}
-            />
-          </div>
-
-          <div className="settings-item toggle-item">
-            <span>Payment Receipts</span>
-            <Toggle
-              checked={settings.paymentReceipts}
-              onChange={(v) => update("paymentReceipts", v)}
-            />
-          </div>
-
-        </div>
-      </div>
-
-      {/* MARKETING */}
-      <div className="card settings-card">
-        <h3>Marketing</h3>
-
-        <div className="settings-list">
-
-          <div className="settings-item toggle-item">
-            <span>Promotions</span>
-            <Toggle
-              checked={settings.promotions}
-              onChange={(v) => update("promotions", v)}
-            />
-          </div>
-
-          <div className="settings-item toggle-item">
-            <span>Event Recommendations</span>
-            <Toggle
-              checked={settings.recommendations}
-              onChange={(v) => update("recommendations", v)}
-            />
-          </div>
-
-        </div>
-      </div>
-
     </div>
   );
 };

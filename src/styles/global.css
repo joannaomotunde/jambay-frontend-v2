@@ -42,11 +42,6 @@ a {
   color: inherit;
   text-decoration: none;
 }
-
-main {
-  padding: 32px 24px;  
-}
-
 .app-main {
   min-height: calc(100vh - 120px); /* header + footer buffer */
   padding: 16px;
@@ -233,6 +228,7 @@ main {
   max-width: 1200px;
   margin: 0 auto;
   width: 100%;
+  padding: 0 16px;
 }
 .stat-card {
   display: flex;
@@ -353,20 +349,13 @@ main {
 
 /* GRID */
 .events-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 }
 /* EMPTY STATE */
 .empty-state {
   text-align: center;
   padding: 60px 20px;
   color: var(--text-secondary);
-}
-.events-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
 }
 
 /* EVENT DETAILS PAGE */
@@ -450,9 +439,7 @@ main {
 }
 
 .ticket-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 }
 
 .ticket-card {
@@ -559,9 +546,7 @@ main {
 }
 /* SECTION GRID */
 .section-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
+   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 }
 
 /* SECTION CARD */
@@ -640,6 +625,7 @@ main {
 .seatmap {
   display: flex;
   flex-direction: column;
+  min-width: 500px;
   gap: 12px;
 }
 
@@ -800,17 +786,6 @@ main {
   font-weight: bold;
   font-size: 18px;
   margin-bottom: 16px;
-}
-
-/* MOBILE */
-@media (max-width: 768px) {
-  .checkout-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .checkout-right {
-    position: static;
-  }
 }
 
 .payment-auth {
@@ -1141,8 +1116,8 @@ main {
 .redeem-action {
   margin-top: 24px;
   text-align: center;
-}
-/* PROFILE */
+}/* ================= PROFILE ================= */
+
 /* PAGE WRAPPER */
 .profile-page {
   padding-bottom: 40px;
@@ -1156,12 +1131,14 @@ main {
   margin-bottom: 16px;
 }
 
-/* PROFILE CARD */
+/* ================= PROFILE CARD ================= */
+
 .profile-card {
   padding: 16px;
   margin-bottom: 20px;
 }
 
+/* TOP SECTION */
 .profile-top {
   display: flex;
   align-items: center;
@@ -1173,16 +1150,18 @@ main {
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  background: #393cc0;
+  background: var(--accent);
   color: #fff;
+
   display: flex;
   align-items: center;
   justify-content: center;
+
   font-weight: 600;
   font-size: 16px;
 }
 
-/* TEXT */
+/* NAME + EMAIL */
 .profile-meta h2 {
   margin: 0;
   font-size: 16px;
@@ -1190,12 +1169,25 @@ main {
 }
 
 .profile-meta p {
-  margin: 2px 0 0;
+  margin-top: 2px;
   font-size: 14px;
-  color: #666;
+  color: var(--text-secondary);
 }
 
-/* ACTIONS CARD */
+/* EXTRA INFO (PHONE) */
+.profile-extra {
+  margin-top: 8px;
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+/* EDIT BUTTON */
+.profile-edit {
+  margin-top: 16px;
+}
+
+/* ================= ACTIONS CARD ================= */
+
 .profile-actions {
   padding: 16px;
 }
@@ -1203,38 +1195,55 @@ main {
 .profile-actions h3 {
   margin-bottom: 10px;
   font-size: 14px;
-  color: #555;
+  color: var(--text-secondary);
 }
 
-/* ACTION LIST */
+/* LIST */
 .action-list {
   display: flex;
   flex-direction: column;
 }
 
+/* ================= ACTION ITEM (REUSABLE) ================= */
+
 .action-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
+
   padding: 14px 0;
-  border-bottom: 1px solid #eee;
-  cursor: pointer;
+  border-bottom: 1px solid var(--border);
+
   font-size: 15px;
+  cursor: pointer;
+
+  transition: background 0.2s;
 }
 
 .action-item:last-child {
   border-bottom: none;
 }
 
-/* INTERACTION */
-.action-item:active {
-  opacity: 0.6;
+/* LEFT CONTENT */
+.action-item span:first-child {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
-/* ARROW */
+/* RIGHT ARROW */
 .arrow {
+  font-size: 16px;
   color: #999;
-  font-size: 18px;
+}
+
+/* INTERACTION */
+.action-item:hover {
+  background: #f9fafb;
+}
+
+.action-item:active {
+  opacity: 0.6;
 }
 /* EDIT PROFILE*/
 /* PAGE WRAPPER */
@@ -1403,32 +1412,114 @@ main {
   justify-content: space-between;
   align-items: center;
 }
+/* ================= NOTIFICATIONS ================= */
+
+.notifications-page {
+  padding-bottom: 40px;
+}
+
+.notifications-card {
+  padding: 0;
+}
+
+/* LIST */
+.notification-list {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ITEM */
+.notification-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+
+  padding: 16px;
+  border-bottom: 1px solid var(--border);
+
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.notification-item:last-child {
+  border-bottom: none;
+}
+
+/* HOVER */
+.notification-item:hover {
+  background: #f9fafb;
+}
+
+/* UNREAD STATE */
+.notification-item.unread {
+  background: #eef2ff; /* soft accent */
+}
+
+/* CONTENT */
+.notification-content h4 {
+  font-size: 15px;
+  margin-bottom: 4px;
+}
+
+.notification-content p {
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.notification-content span {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-top: 6px;
+  display: block;
+}
+
+/* UNREAD DOT */
+.dot {
+  width: 8px;
+  height: 8px;
+  background: var(--accent);
+  border-radius: 50%;
+  margin-top: 6px;
+}
+/* ================= MOBILE FIRST ================= */
+
+/* TABLET */
+@media (min-width: 768px) {
+  .page-narrow {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+}
+
 /* DESKTOP */
-@media (min-width: 768px) {
-  .settings-page {
-    max-width: 720px;
-    margin: 0 auto;
+@media (min-width: 1024px) {
+  .container {
+    max-width: 1200px;
   }
 }
 
-/* DESKTOP CENTERING ONLY */
-@media (min-width: 768px) {
-  .edit-profile-page {
-    max-width: 720px;
-    margin: 0 auto;
-  }
-}
+/* ================= MOBILE FIXES ================= */
 
-/* CONTAINER WIDTH (DESKTOP CONTROL) */
-@media (min-width: 768px) {
-  .profile-page {
-    max-width: 720px;
-    margin: 0 auto;
-  }
-}
-
-/* MOBILE */
 @media (max-width: 768px) {
+
+  /* HEADER */
+  .nav {
+    display: none;
+  }
+
+  /* FOOTER */
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    text-align: center;
+  }
+
+  /* CARDS */
+  .card {
+    padding: 16px;
+  }
+
+  /* ORDER */
   .order-card {
     flex-direction: column;
     align-items: flex-start;
@@ -1438,37 +1529,15 @@ main {
   .order-meta {
     text-align: left;
   }
-}
-/* MOBILE */
-@media (max-width: 768px) {
+
+  /* TICKETS */
   .ticket-card {
     flex-direction: column;
     align-items: flex-start;
     gap: 16px;
   }
-}
-/* ================= RESPONSIVE ================= */
 
-@media (max-width: 768px) {
-  .nav {
-    display: none; 
-  }
-  .footer-grid {
-    grid-template-columns: 1fr;
-    text-align: center;
-  }
-}
-@media (max-width: 1024px) {
-  .events-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-@media (max-width: 768px) {
-  .events-grid {
-    grid-template-columns: 1fr;
-  }
-}
-@media (max-width: 900px) {
+  /* EVENT HERO */
   .event-hero {
     grid-template-columns: 1fr;
   }
@@ -1476,15 +1545,29 @@ main {
   .event-hero-image {
     height: 280px;
   }
-}
-@media (max-width: 1024px) {
-  .section-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
 
-@media (max-width: 768px) {
-  .section-grid {
+  /* CHECKOUT */
+  .checkout-grid {
     grid-template-columns: 1fr;
+  }
+
+  .checkout-right {
+    position: static;
+  }
+
+  .checkout-actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  /* SEATMAP */
+  .seat-row {
+    gap: 6px;
+  }
+
+  .seat-box {
+    width: 30px;
+    height: 30px;
+    font-size: 10px;
   }
 }
